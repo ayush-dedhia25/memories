@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const API = axios.create({
    baseURL: 'https://my-memories-com.herokuapp.com',
-   timeout: 5000,
+   timeout: 15000,
 });
 
 API.interceptors.request.use((req) => {
