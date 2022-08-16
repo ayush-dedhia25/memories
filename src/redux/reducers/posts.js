@@ -6,7 +6,7 @@ function PostsReducer(posts = [], action) {
          return action.payload;
       case Types.CREATE:
          return [...posts, action.payload];
-      case Types.UPDATE_POST:
+      case Types.UPDATE:
       case Types.LIKE:
          return posts.map(post => post._id === action.payload._id ? action.payload : post);
       case Types.DELETE:
