@@ -1,7 +1,10 @@
 import axios from 'axios';
 
+// Production URI  : https://my-memories-com.herokuapp.com
+// Development URI : http://localhost:3000
+
 const API = axios.create({
-   baseURL: 'http://localhost:3000',
+   baseURL: 'https://my-memories-com.herokuapp.com',
    timeout: 5000,
 });
 
