@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { AppBar, Avatar, Button, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Avatar, Button, Toolbar, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
 

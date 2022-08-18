@@ -1,6 +1,6 @@
-import { Grid, IconButton, InputAdornment, TextField } from '@material-ui/core';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import { Grid, IconButton, InputAdornment, TextField } from '@mui/material';
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
 
 function Input({ autoFocus, half, handleChange, handleShowPassword, label, name, type }) {
    return (
@@ -17,7 +17,7 @@ function Input({ autoFocus, half, handleChange, handleShowPassword, label, name,
                endAdornment: (
                   <InputAdornment position="end">
                      <IconButton onClick={handleShowPassword}>
-                        {type === 'password' ? <Visibility /> : <VisibilityOff />}
+                        {type === 'password' ? <VisibilityOutlinedIcon /> : <VisibilityOffOutlinedIcon />}
                      </IconButton>
                   </InputAdornment>
                )

@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Avatar, Button, Container, Grid, Paper, TextField, Typography } from '@material-ui/core';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { Avatar, Button, Container, Grid, Paper, TextField, Typography } from '@mui/material';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useDispatch } from 'react-redux';
 
 import Input from './Input';
-import GoogleAuth from './GoogleAuth';
 import useStyles from './styles';
 import { signin, signup } from '../../redux/actions/auth';
 
@@ -76,7 +75,6 @@ function Auth() {
                <Button type="submit" className={classes.submit} variant="contained" color="primary" fullWidth>
                   {isSignup ? 'Sign Up' : 'Sign In'}
                </Button>
-               <GoogleAuth classes={classes} />
                <Grid container justifyContent="flex-end">
                   <Grid item>
                      <Button onClick={switchMode}>

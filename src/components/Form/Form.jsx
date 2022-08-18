@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Button, Paper, TextField, Typography } from '@material-ui/core';
+import { Button, Paper, TextField, Typography } from '@mui/material';
 import FileBase from 'react-file-base64';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';

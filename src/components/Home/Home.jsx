@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { AppBar, Button, Container, Grid, Grow, Paper, TextField } from '@material-ui/core';
-import ChipInput from 'material-ui-chip-input';
+import { AppBar, Button, Container, Chip, Grid, Grow, Paper, TextField } from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
@@ -17,7 +16,7 @@ function useQuery() {
 function Home() {
    const [currentId, setCurrentId] = useState(0);
    const [search, setSearch] = useState('');
-   const [tags, setTags] = useState([]);
+   const [tags, setTags] = useState('');
    
    const dispatch = useDispatch();
    const classes = useStyles();
@@ -29,8 +28,8 @@ function Home() {
    
    const searchPost = (e) => {
       if (search.trim() || tags) {
-         dispatch(getPostBySearch({ search, tags: tags.join(',') }));
-         navigate(`/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',')}`);
+         dispatch(getPostBySearch({ search, tags: tags.split(' ').join(',') }));
+         navigate(`/posts/search?searchQuery=${search || 'none'}&tags=${tags.split(' ').join(',')}`);
       } else {
          navigate('/');
       }
@@ -70,13 +69,14 @@ function Home() {
                         onKeyPress={handleKeyPress}
                         onChange={({ target }) => setSearch(target.value)}
                      />
-                     <ChipInput
-                        label="Search Tags"
-                        style={{ margin: '10px 0' }}
-                        value={tags}
-                        onAdd={(chip) => handleAddChip(chip)}
-                        onDelete={(chip) => handleDeleteChip(chip)}
+                     <TextField
+                        name="tags"
                         variant="outlined"
+                        label="Search Tags"
+                        fullWidth
+                        sx={{ margin: '15px 0' }}
+                        value={tags}
+                        onChange={(e) => setTags(e.target.value)}
                      />
                      <Button className={classes.searchButton} color="primary" onClick={searchPost} variant="contained">
                         Search

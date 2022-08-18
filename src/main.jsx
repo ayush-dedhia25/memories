@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider, createTheme } from "@mui/material";
 
 // Redux Imports
 import { Provider } from 'react-redux';
@@ -13,12 +14,15 @@ import reducers from './redux/reducers';
 import './index.css';
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)));
+const theme = createTheme();
 
 function Main() {
    return (
       <BrowserRouter>
          <Provider store={store}>
-            <App />
+            <ThemeProvider theme={theme}>
+               <App />
+            </ThemeProvider>
          </Provider>
       </BrowserRouter>
    );
