@@ -9,6 +9,9 @@ if (environment === 'production') {
    backendURI = 'http://localhost:3001';
 }
 
+console.log('Using:', backendURI);
+console.log('Mode:', environment);
+
 const API = axios.create({ baseURL: backendURI, timeout: 15000 });
 
 API.interceptors.request.use((req) => {
