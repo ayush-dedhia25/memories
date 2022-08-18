@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Button, Paper, TextField, Typography } from '@material-ui/core';
 import FileBase from 'react-file-base64';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { createPost, updatePost } from '../../redux/actions/posts';
@@ -9,8 +10,9 @@ import useStyles from './styles';
 function Form({ currentId, setCurrentId }) {
    const [postData, setPostData] = useState({ title: '', message: '', tags: '', selectedFile: '' });
    const classes = useStyles();
+   const navigate = useNavigate();
    const dispatch = useDispatch();
-   const post = useSelector(state => currentId ? state.posts.find(p => p._id === currentId) : null);
+   const post = useSelector((state) => currentId ? state.posts.posts.find(p => p._id === currentId) : null);
    const user = JSON.parse(localStorage.getItem('profile'));
    
    useEffect(() => {
@@ -20,18 +22,18 @@ function Form({ currentId, setCurrentId }) {
    const handleSubmit = async (e) => {
       e.preventDefault();
       if (currentId === 0) {
-         dispatch(createPost({ ...postData, name: user?.result?.name }));
+         dispatch(createPost({ ...postData, name: user?.result?.name }, navigate));
          clear();
       } else {
          dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
          clear();
       }
-   }
+   };
    
    const clear = () => {
       setCurrentId(0);
       setPostData({ title: '', message: '', tags: '', selectedFile: '' });
-   }
+   };
    
    if (!user?.result?.name) {
       return (
@@ -44,7 +46,7 @@ function Form({ currentId, setCurrentId }) {
    }
    
    return (
-      <Paper className={classes.paper}>
+      <Paper className={classes.paper} elevation={6}>
          <form className={`${classes.form} ${classes.root}`} autoComplete="off" noValidate onSubmit={handleSubmit}>
             <Typography variant="h6">{currentId ? "Editing" : "Creating"} a Memory</Typography>
             <TextField

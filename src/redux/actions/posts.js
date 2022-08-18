@@ -1,22 +1,53 @@
 import * as Types from '../constants/actionTypes';
 import * as api from '../../api';
 
-export function getPosts() {
+export function getPost(id) {
    return async (dispatch) => {
       try {
-         const { data } = await api.fetchPosts();
-         dispatch({ type: Types.FETCH_ALL, payload: data });
+         dispatch({ type: Types.START_LOADING });
+         const { data } = await api.fetchPost(id);
+         dispatch({ type: Types.FETCH_POST, payload: data });
+         dispatch({ type: Types.END_LOADING });
       } catch (err) {
          console.log(err);
       }
    };
 }
 
-export function createPost(post) {
+export function getPosts(page) {
    return async (dispatch) => {
       try {
+         dispatch({ type: Types.START_LOADING });
+         const { data } = await api.fetchPosts(page);
+         dispatch({ type: Types.FETCH_ALL, payload: data });
+         dispatch({ type: Types.END_LOADING });
+      } catch (err) {
+         console.log(err);
+      }
+   };
+}
+
+export function getPostBySearch(searchQuery) {
+   return async (dispatch) => {
+      try {
+         dispatch({ type: Types.START_LOADING });
+         const { data } = await api.fetchPostsBySearch(searchQuery);
+         dispatch({ type: Types.FETCH_BY_SEARCH, payload: data });
+         dispatch({ type: Types.END_LOADING });
+      } catch (err) {
+         console.log(err);
+      }
+   };
+}
+
+export function createPost(post, navigate) {
+   return async (dispatch) => {
+      try {
+         dispatch({ type: Types.START_LOADING });
          const { data } = await api.createPost(post);
+         navigate(`/posts/${data._id}`);
          dispatch({ type: Types.CREATE, payload: data });
+         dispatch({ type: Types.END_LOADING });
       } catch (err) {
          console.log(err);
       }
